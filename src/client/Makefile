@@ -39,7 +39,7 @@ vpath %.proto $(PROTOS_PATH)
 
 all: TpccClient
 
-TpccClient: TpccClient.o
+TpccClient: main.o TpccClient.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 #greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o

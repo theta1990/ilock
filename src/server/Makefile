@@ -39,7 +39,7 @@ vpath %.proto $(PROTOS_PATH)
 
 all: DbServer
 
-DbServer: DbServer.o
+DbServer: main.o DbServer.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 #greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o
