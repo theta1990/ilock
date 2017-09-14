@@ -28,6 +28,7 @@ LDFLAGS += -L/usr/local/lib `pkg-config --libs protobuf grpc++ grpc`\
            -Wl,--no-as-needed -lgrpc++_reflection -Wl,--as-needed\
            -ldl
 endif
+LDFLAGS += ../common/libcommon.a
 PROTOC = protoc
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
 GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
@@ -36,7 +37,10 @@ PROTOS_PATH = .
 
 vpath %.proto $(PROTOS_PATH)
 
-all: DbServer.o
+all: DbServer
+
+DbServer: DbServer.o
+	$(CXX) $^ $(LDFLAGS) -o $@
 
 #greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o
 #	$(CXX) $^ $(LDFLAGS) -o $@

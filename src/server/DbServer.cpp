@@ -33,7 +33,7 @@ class DbServerImpl final : public DbInterface::Service {
       StartReply* reply) override {
 
     int64_t tId = request->transid();
-    reply->set_transid(tId);
+    reply->set_transid(tId * 2);
     return Status::OK;  
   }
 

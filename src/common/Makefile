@@ -36,12 +36,13 @@ PROTOS_PATH = .
 
 vpath %.proto $(PROTOS_PATH)
 
-all: system-check  db.pb.o db.grpc.pb.o
+all: system-check  libcommon.a
 
-#all: system-check greeter_client greeter_server greeter_async_client greeter_async_client2 greeter_async_server
+objects = db.pb.o \
+			db.grpc.pb.o
 
-#greeter_client: helloworld.pb.o helloworld.grpc.pb.o greeter_client.o
-#	$(CXX) $^ $(LDFLAGS) -o $@
+libcommon.a: ${objects} 
+	ar -cvq libcommon.a ${objects}
 
 .PRECIOUS: %.grpc.pb.cc
 %.grpc.pb.cc: %.proto
@@ -52,8 +53,7 @@ all: system-check  db.pb.o db.grpc.pb.o
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=. $<
 
 clean:
-	rm -f *.o *.pb.cc *.pb.h 
-
+	rm -f *.o *.pb.cc *.pb.h  *.a
 
 # The following is to test your system and ensure a smoother experience.
 # They are by no means necessary to actually compile a grpc-enabled software.
