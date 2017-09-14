@@ -1,14 +1,5 @@
-#include <iostream>
-#include <memory>
-#include <string>
-
-#include <grpc++/grpc++.h>
-#include "common/db.grpc.pb.h"
 #include "DbServer.h"
 
-using namespace std;
-using namespace grpc;
-using namespace dbinter;
 using namespace dbserver;
 
 Status DbServerImpl::put(ServerContext* context, const PutRequest* request,
